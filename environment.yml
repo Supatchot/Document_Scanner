@@ -1,0 +1,8 @@
+name: DocScannerEnv2
+channgels:
+  - conda-forge
+dependencies:
+  - python=3.13
+  - opencv
+  - PyQt6
+  - pip
