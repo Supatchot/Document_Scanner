@@ -1,10 +1,13 @@
 from PyQt6.QtWidgets import QMainWindow, QApplication, QLabel, QPushButton, QVBoxLayout, QWidget, QFileDialog
 from PyQt6.QtGui import QIcon, QPixmap
 from PyQt6.QtCore import Qt
+from CV_Module import DocumentScanner
 
 class Window(QMainWindow):
     def __init__(self):
         super().__init__()
+
+        self.file_path = None
 
         # window setting
         self.setMinimumSize(600, 500)
@@ -62,14 +65,14 @@ class Window(QMainWindow):
         self.setCentralWidget(centerWidget)
 
     def upload(self):
-        file_path, _ = QFileDialog.getOpenFileName(
+        self.file_path, _ = QFileDialog.getOpenFileName(
             self,
             "Select Image",
             "",
             "Images (*.png *.jpg *.jpeg *.bmp)"
         )
-        if file_path:
-            pixmap = QPixmap(file_path)
+        if self.file_path:
+            pixmap = QPixmap(self.file_path)
             pixmap = pixmap.scaled(
                 self.image.width(),
                 self.image.height(),
@@ -79,7 +82,7 @@ class Window(QMainWindow):
 
             self.image.setPixmap(pixmap)
             self.image.setText("")
-            print(file_path)
+            print(self.file_path)
 
 
     def scan(self):
@@ -89,6 +92,26 @@ class Window(QMainWindow):
             self.result.setText("Scan complete!")
 
         # นะโมใส่ code นี่นะ รูปคือ file_path
+        scanner = DocumentScanner()
+        scanned_path = scanner.scan(self.file_path, save=True)
+
+        if scanned_path is None:
+            self.result.setText("Document not found or failed to save.")
+            return
+
+        pixmap = QPixmap(scanned_path).scaled(
+            self.image.width(),
+            self.image.height(),
+            Qt.AspectRatioMode.KeepAspectRatio,
+            Qt.TransformationMode.SmoothTransformation
+        )
+        self.image.setPixmap(pixmap)
+        self.image.setText("")
+        self.result.setText("Scan complete!")
+
+        
+
+
 
 app = QApplication([])
 window = Window()
