@@ -1,5 +1,5 @@
 name: DocScannerEnv2
-channgels:
+channels:
   - conda-forge
 dependencies:
   - python=3.13
