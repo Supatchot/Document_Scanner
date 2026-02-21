@@ -85,13 +85,7 @@ class Window(QMainWindow):
             self.image.setText("")
             print(self.file_path)
 
-
     def scan(self):
-        if self.image.pixmap() is None:
-            self.result.setText("Please Press Scan")
-        else:
-            self.result.setText("The scanned file is saved in document folder")
-
         scanner = DocumentScanner()
         scanned_path = scanner.scan(self.file_path, save=True)
 
