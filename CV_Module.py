@@ -1,1 +1,1 @@
-import openCV
+import cv2
