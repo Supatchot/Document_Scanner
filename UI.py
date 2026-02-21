@@ -7,6 +7,7 @@ class Window(QMainWindow):
     def __init__(self):
         super().__init__()
 
+        # Result Image
         self.file_path = None
 
         # window setting
@@ -24,7 +25,7 @@ class Window(QMainWindow):
         button_width = 200
         button_height = 35
 
-        # ==== Element =====
+        # ========= Element =========
         # Top Text
         self.upload_label = QLabel("Upload your image")
         self.upload_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
@@ -89,9 +90,8 @@ class Window(QMainWindow):
         if self.image.pixmap() is None:
             self.result.setText("Please Press Scan")
         else:
-            self.result.setText("Scan complete!")
+            self.result.setText("The scanned file is saved in document folder")
 
-        # นะโมใส่ code นี่นะ รูปคือ file_path
         scanner = DocumentScanner()
         scanned_path = scanner.scan(self.file_path, save=True)
 
@@ -107,11 +107,7 @@ class Window(QMainWindow):
         )
         self.image.setPixmap(pixmap)
         self.image.setText("")
-        self.result.setText("Scan complete!")
-
-        
-
-
+        self.result.setText("The scanned file is saved in document folder!")
 
 app = QApplication([])
 window = Window()
