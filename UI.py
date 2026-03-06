@@ -31,6 +31,7 @@ class Window(QMainWindow):
         button_height = 35
 
         # ==== Element =====
+        # Top Text
         self.upload_label = QLabel("Upload your image(s)")
         self.upload_label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.upload_label.setFont(text_style)
@@ -48,10 +49,11 @@ class Window(QMainWindow):
         self.scan_button.setFont(button_style)
         self.scan_button.setFixedSize(button_width, button_height)
 
-        # NEW: Checkbox
+        # Mutiple image checkbox
         self.export_pdf_checkbox = QCheckBox("Export scanned pages to a single PDF")
         self.export_pdf_checkbox.setChecked(False)
 
+        # Result image
         self.result = QLabel("", alignment=Qt.AlignmentFlag.AlignHCenter)
 
         # Action
