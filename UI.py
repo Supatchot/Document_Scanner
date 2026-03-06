@@ -4,10 +4,8 @@ from PyQt6.QtWidgets import (
 )
 from PyQt6.QtGui import QIcon, QPixmap
 from PyQt6.QtCore import Qt
-
 from CV_Module import DocumentScanner
-
-from PIL import Image  # pip install pillow
+from PIL import Image
 
 
 class Window(QMainWindow):
